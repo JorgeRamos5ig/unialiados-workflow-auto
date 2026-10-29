@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const WORKFLOW = '../Unialiados - Prospección local (v17.4 fix gramatical).json';
+const WORKFLOW = require('path').join(__dirname, '..', 'Unialiados - Prospección local (v17.4 fix gramatical).json');
 const API = 'http://127.0.0.1:11434/api/chat';
 const MODEL = 'qwen3.5:4b';
 const data = JSON.parse(fs.readFileSync(WORKFLOW, 'utf8'));
