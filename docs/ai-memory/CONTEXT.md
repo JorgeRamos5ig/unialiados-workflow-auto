@@ -23,7 +23,7 @@
 3. Read HANDOFF.md when continuing prior work.
 4. Inspect only the relevant script/workflow sections and verify changes with a safe dry run when available.
 5. Update memory incrementally with evidence; never record secrets, tokens, customer data or unverified claims.
-- Latest published master commit: 5927c9f on master (2026-10-28, v17.6). The memory branch is documentation-only; see DECISIONS.md D-005 through D-007 for the latest workflow decisions and validation findings.
+- Latest published master commit: 099cea4 on master (2026-10-28, validation hardening and operational workbook update). The memory branch is documentation-only; see DECISIONS.md D-005 through D-007 for the latest workflow decisions and validation findings.
 
 ## Latest validation handoff
 
