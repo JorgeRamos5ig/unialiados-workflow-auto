@@ -23,3 +23,11 @@
 3. Read HANDOFF.md when continuing prior work.
 4. Inspect only the relevant script/workflow sections and verify changes with a safe dry run when available.
 5. Update memory incrementally with evidence; never record secrets, tokens, customer data or unverified claims.
+- Latest published master commit: 5927c9f on master (2026-10-28, v17.6). The memory branch is documentation-only; see DECISIONS.md D-005 through D-007 for the latest workflow decisions and validation findings.
+
+## Latest validation handoff
+
+- The local workflow JSON contains fixes for false Portuguese positives, a missed English `in`, duplicated CTA text, and extra CTA-as-paragraph output.
+- FIRST and SECOND contacts now require exactly two `paragraphs`; the CTA remains only in `cta`.
+- The validation code passed a JavaScript syntax check. This does not replace a controlled n8n import/run or a real Ollama/Outlook/Excel integration test.
+- Local XLSM changes, backup files and generated operational material are intentionally excluded from this memory branch.
