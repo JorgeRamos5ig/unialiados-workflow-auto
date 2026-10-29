@@ -6,7 +6,7 @@
 
 - Repository: https://github.com/JorgeRamos5ig/unialiados-workflow-auto
 - Default branch: master
-- Current audited commit: 4c203a9420c971827e1f3559d77b362ff9803212 (2026-10-28)
+- Current audited commit: 9c31e17 on master (2026-10-28, v17.5 — campaign rotation per contact, AXA CTA aligned to Lorena's audio; see DECISIONS.md D-005/D-006)
 - Stack: PowerShell 96%, Batchfile 4%; includes an n8n workflow JSON and an XLSM operational workbook.
 - Visibility: private. Never copy workflow credentials, customer data, workbook contents or secrets into the public Obsidian hub.
 
