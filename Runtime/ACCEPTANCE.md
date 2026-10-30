@@ -1,39 +1,23 @@
-# Acceptance test — 2026-10-29
+# Verificación de aceptación — 2026-10-30
 
-Command:
+## Verificaciones determinísticas
 
-```text
-node Runtime/acceptance_test.js
-```
+- `node Runtime/workflow_static_check.cjs`: 56 nodos, 25 bloques de JavaScript compilados, cero conexiones huérfanas; workflow inactivo, envío apagado y horario deshabilitado.
+- `node Runtime/acceptance_test.js __regression_only__`: PASS para preparación, español legítimo con «Esta/también», mezcla de inglés, CTA duplicado, dos viñetas, supuestos no sustentados, afirmaciones AXA internacionales y mezcla de campañas.
+- `Importar_Unialiados_Optimizado.ps1`: sintaxis PowerShell válida.
+- n8n 2.11.3 importó el flujo en un perfil SQLite aislado. La importación no activa ni ejecuta el workflow.
+- El XLSM inspeccionado en solo lectura conserva VBA, la tabla `BaseLeads` (36 columnas) y `Enviar ahora`.
 
-Environment verified:
+## Generación con Ollama
 
-- Ollama API: `http://127.0.0.1:11434/api/chat`
-- Model: `qwen3.5:4b`
-- Workflow JSON: `Unialiados - Prospección local (v17.4 fix gramatical).json`
+Modelo: `qwen3.5:4b`, API local `http://127.0.0.1:11434/api/chat`.
 
-Matrix:
+La última matriz completa previa a los ajustes dirigidos fue 7/9 aprobados y 2 retenidos (Unialiados THIRD por mezcla de campañas; AXA FIRST por quedar bajo el mínimo de palabras). En una re-prueba dirigida posterior, Unialiados THIRD pasó tras tres intentos, y AXA FIRST fue retenido tras tres intentos por incluir texto interno («La campaña busca…»). Una re-prueba de Unisoft SECOND aprobó formato, pero la lectura encontró una afirmación sobre archivos dispersos no sustentada; se añadió una regresión para retener esa fórmula.
 
-| Campaign | FIRST | SECOND | THIRD |
-| --- | --- | --- | --- |
-| Unialiados | PASS | PASS | PASS |
-| AXA Colpatria | PASS | PASS | PASS |
-| Unisoft | PASS | PASS | PASS |
+No se ha repetido la matriz completa con todos los últimos ajustes. El resultado generativo final se considera pendiente, no 9/9.
 
-Final result: **9/9 accepted, 0 rejected, 0 advertising-signal matches**.
+## Decisión de producción
 
-Campaign rotation test:
+**No listo para producción.** `sendEnabled=false` y `senderEmail=PENDIENTE_CONFIGURAR`. Faltan confirmar identidad del remitente, credencial SMTP, proceso de bajas, límites diarios/mensuales, tiempos de seguimiento y matriz completa de exclusiones AXA. Se requiere selección manual de leads/campaña y revisión humana de los borradores.
 
-```text
-node Runtime/rotation_acceptance_test.js
-```
-
-Result: **PASS** — the same lead rotated across `FIRST → SECOND → THIRD` as `Unialiados → AXA Colpatria → Unisoft`, with every stage accepted by the authoritative campaign validator.
-
-n8n import smoke test:
-
-- n8n `2.11.3` imported the workflow into an isolated temporary SQLite profile.
-- The imported workflow contained 55 nodes, remained inactive, and had no missing connection targets.
-- The full runtime was not started because it would require real Excel/SMTP/Tavily integrations; no external message or workbook write was performed.
-
-The harness exercises the embedded `Construir Prompt de Correo` and `Preparar Datos de Envío` code and uses Ollama responses, including the configured retry path. It does not send mail, write Excel, call Tavily, or execute the full n8n runtime. SMTP delivery, workbook persistence, and end-to-end n8n execution still require a controlled integration test with a test mailbox and a workbook backup.
+No se enviaron correos, no se activó el workflow y no se realizó prueba integral con Excel/SMTP/Tavily.

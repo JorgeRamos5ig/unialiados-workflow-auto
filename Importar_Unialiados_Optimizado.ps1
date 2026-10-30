@@ -170,7 +170,9 @@ try {
             $errors.Add("Fila $r`: correo invalido o contiene mas de una direccion ($email)"); continue
         }
         if (-not $priority) { $priority = 'Media' }
+        if (-not $campaign -and $email) { $errors.Add("Fila $r`: seleccione manualmente Campaña (Unialiados, AXA Colpatria o Unisoft)"); continue }
         if (-not $campaign) { $campaign = 'Unialiados' }
+        if ($email -and $campaign -eq 'Auto') { $errors.Add("Fila $r`: seleccione una campana concreta; la asignacion automatica esta deshabilitada"); continue }
         if ($validPriorities -notcontains $priority) { $errors.Add("Fila $r`: prioridad no valida ($priority)"); continue }
         if ($validCampaigns -notcontains $campaign) { $errors.Add("Fila $r`: campana no valida ($campaign)"); continue }
         $inputRecords.Add(@{
@@ -270,6 +272,7 @@ try {
             'Fuente' = $rec.Source
             'Fecha de creación del lead' = $today
             'Excluir (Sí/No)' = 'No'
+            'Enviar ahora' = 'No'
             'Observaciones comerciales' = $rec.Notes
             'ID_Empresa' = $companyByKey[$key]
             'Procesando' = 'No'
