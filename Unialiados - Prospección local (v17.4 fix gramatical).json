@@ -1261,7 +1261,7 @@
             {
               "id": "local-05",
               "name": "senderEmail",
-              "value": "PENDIENTE_CONFIGURAR",
+              "value": "laura.alonso@unialiados.com",
               "type": "string"
             },
             {
@@ -1405,7 +1405,7 @@
             {
               "id": "manual-senderIdentityConfirmed",
               "name": "senderIdentityConfirmed",
-              "value": false,
+              "value": true,
               "type": "boolean"
             },
             {
